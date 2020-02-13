@@ -4,6 +4,7 @@ import { Icon, WhiteSpace, WingBlank, Card } from '@ant-design/react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import Test from './Test'
 import Details from './Details'
+import GoodsMore from './GoodsMore'
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight
 const STATUS_BAR_HEIGHT3 = StatusBar.currentHeight * 3
@@ -66,22 +67,24 @@ class Homepage extends Component {
                     <WhiteSpace size="lg" />
                     <WingBlank size="lg">
                         <View style={{ elevation: 5, backgroundColor: '#fff', borderRadius: 10, paddingTop: 10, paddingBottom: 10 }}>
-                            <View style={{ height: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <TouchableHighlight style={{height:60,width:'100%'}} onPress={() => this.props.navigation.navigate('Goodsmore')}>
                                 <View style={{ height: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Image source={require('./img/商品预警.png')} style={{ height: '100%', marginLeft: -30 }} resizeMode='contain' />
-                                    <View style={{ marginLeft: -30, justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 18, color: '#333', marginBottom: 5 }}>
-                                            商品预警
-                                            </Text>
-                                        <Text style={{ fontSize: 14, color: '#b2b2b2' }}>
-                                            商品预警详情
-                                            </Text>
+                                    <View style={{ height: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Image source={require('./img/商品预警.png')} style={{ height: '100%', marginLeft: -30 }} resizeMode='contain' />
+                                        <View style={{ marginLeft: -30, justifyContent: 'center' }}>
+                                            <Text style={{ fontSize: 18, color: '#333', marginBottom: 5 }}>
+                                                商品预警
+                                                </Text>
+                                            <Text style={{ fontSize: 14, color: '#b2b2b2' }}>
+                                                商品预警详情
+                                                </Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ justifyContent: 'center' }}>
+                                        <Image source={require('./img/返回.png')} style={{ width: 15, height: 15, marginRight: 5 }} />
                                     </View>
                                 </View>
-                                <View style={{ justifyContent: 'center' }}>
-                                    <Image source={require('./img/返回.png')} style={{ width: 15, height: 15, marginRight: 5 }} />
-                                </View>
-                            </View>
+                            </TouchableHighlight>
                             <WhiteSpace />
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, marginBottom: 13 }}>
                                 <View style={{ alignItems: 'center' }}>
@@ -238,8 +241,10 @@ class Homepage extends Component {
                             <WhiteSpace size='lg' />
                             <View style={{ width: '100%', height: 100, flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, marginBottom: 13 }}>
                                 <View style={{ width: '65%', height: '100%', justifyContent: 'space-between', paddingRight: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!重型火箭轮番袭击美大使馆,大批外交官...</Text>
-                                    <Text style={{ fontSize: 14, color: '#b3b3b3' }}>在美国与其中东盟友还在为沙特石油...</Text>
+                                    <View>
+                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!重型火箭轮番袭击美大使馆,外交官...</Text>
+                                    <Text style={{ fontSize: 14, color: '#b3b3b3',marginTop:3 }}>在美国与其中东盟友还在为沙特...</Text>
+                                    </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Icon name="fire" size="xs" color="#aeb0c2" />
@@ -262,8 +267,10 @@ class Homepage extends Component {
 
                             <View style={{ width: '100%', height: 100, flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, marginBottom: 13 }}>
                                 <View style={{ width: '65%', height: '100%', justifyContent: 'space-between', paddingRight: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!火箭轮番袭击美大使馆?</Text>
-                                    <Text style={{ fontSize: 14, color: '#b3b3b3' }}>在美国与其中东盟友还在为沙特石油...</Text>
+                                    <View>
+                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!重型火箭轮番袭击美大使馆,外交官...</Text>
+                                    <Text style={{ fontSize: 14, color: '#b3b3b3',marginTop:3 }}>在美国与其中东盟友还在为沙特...</Text>
+                                    </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Icon name="fire" size="xs" color="#aeb0c2" />
@@ -279,14 +286,16 @@ class Homepage extends Component {
                                         </View>
                                     </View>
                                 </View>
-                                <Image source={require('./img/图片2.png')} style={{ width: '35%', height: '100%' }} />
+                                <Image source={require('./img/图片.png')} style={{ width: '35%', height: '100%' }} />
                             </View>
                             <View style={{ height: 1, backgroundColor: '#ecedee', marginBottom: 13 }} />
 
                             <View style={{ width: '100%', height: 100, flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10 }}>
                                 <View style={{ width: '65%', height: '100%', justifyContent: 'space-between', paddingRight: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!火箭轮番袭击美大使馆?</Text>
-                                    <Text style={{ fontSize: 14, color: '#b3b3b3' }}>在美国与其中东盟友还在为沙特石油...</Text>
+                                    <View>
+                                    <Text style={{ fontSize: 16, color: '#333' }}>伊朗一夜间调转枪口!重型火箭轮番袭击美大使馆,外交官...</Text>
+                                    <Text style={{ fontSize: 14, color: '#b3b3b3',marginTop:3 }}>在美国与其中东盟友还在为沙特...</Text>
+                                    </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Icon name="fire" size="xs" color="#aeb0c2" />
@@ -302,9 +311,8 @@ class Homepage extends Component {
                                         </View>
                                     </View>
                                 </View>
-                                <Image source={require('./img/图片3.png')} style={{ width: '35%', height: '100%' }} />
+                                <Image source={require('./img/图片.png')} style={{ width: '35%', height: '100%' }} />
                             </View>
-
                         </View>
                     </WingBlank>
 
@@ -411,6 +419,9 @@ const HomeStackNavigator = createStackNavigator(
         },
         Details: {
             screen: Details
+        },
+        Goodsmore: {
+            screen: GoodsMore
         }
     }
 )
