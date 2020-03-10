@@ -1,26 +1,86 @@
 import React from 'react';
-import { ScrollView, Text, View, TouchableOpacity, StatusBar, Dimensions, TouchableNativeFeedback, StyleSheet, ImageBackground } from 'react-native';
-import { Tabs, Icon } from '@ant-design/react-native';
-import { Echarts, echarts } from 'react-native-secharts';
-import DataTabel from './Components/DataTabel/DataTabel';
+import {ScrollView, Text, View, TouchableOpacity, StatusBar} from 'react-native';
+import {Icon, Tabs, WhiteSpace, WingBlank} from '@ant-design/react-native';
+
+const renderContent = (tab, index) => {
+  const style = {
+    paddingVertical: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    backgroundColor: '#ddd',
+  };
+  const content = [1, 2, 3, 4, 5, 6, 7, 8].map(i => {
+    return (
+        <View key={`${index}_${i}`} style={style}>
+          <Text>
+            {tab.title} - {i}
+          </Text>
+        </View>
+    );
+  });
+  return (
+      <ScrollView style={{ backgroundColor: '#fff',flex:1 }}>
+        <WhiteSpace size="lg" />
+        <WingBlank size="lg">
+          <View style={{flex: 1,flexDirection:'row',justifyContent:'space-between',paddingHorizontal: 20}}>
+            <View style={{width:'33%'}}>
+              <Text style={{color:'#B4B4B4',textAlign: 'left'}}>
+                全部
+              </Text>
+            </View>
+            <View style={{width:'33%'}}>
+              <Text style={{color:'#B4B4B4',textAlign: 'center'}}>
+                价格
+              </Text>
+            </View>
+            <View style={{width:'33%'}}>
+              <Text style={{color:'#B4B4B4',textAlign: 'right'}}>
+                涨跌幅
+              </Text>
+            </View>
+          </View>
+          <View style={{flex:1,paddingTop: 10}}>
+            {[1,1,1,1,1,1,1,1,1,1,1,1,1].map(item=>{
+              return (
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, marginBottom: 13 }}>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={{ fontSize: 14, color: '#333', paddingBottom: 5 }}>苹果</Text>
+                      <Text style={{ fontSize: 12, color: '#fff', backgroundColor: '#eb0027', padding: 3, borderRadius: 4 }}>红色</Text>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={{ fontSize: 14, color: '#333', paddingBottom: 5 }}>5元/斤</Text>
+                      <Text style={{ fontSize: 12, color: '#a8a8a8' }}>2元/斤</Text>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 14, color: '#333', paddingBottom: 5 }}>1.26%</Text>
+                        <Icon name="rise" size="md" color="green" />
+                      </View>
+                      <Text style={{ fontSize: 12, color: '#a8a8a8' }}>环比-0.00%</Text>
+                    </View>
+                  </View>
+              )
+            })}
+          </View>
+        </WingBlank>
 
 
-
-const { width, height } = Dimensions.get('window')
+        <View></View>
+      </ScrollView>
+  )
+};
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight
 const STATUS_BAR_HEIGHT3 = StatusBar.currentHeight * 3
-const scrollHeight = height - 140
 
-export default class GoodsMore extends React.Component {
+export default class BasicTabsExample extends React.Component {
 
   static navigationOptions = {
-    headerTitle: '小麦',
+    headerTitle: '商品预警',
     headerStyle: {
       height: STATUS_BAR_HEIGHT3,
       paddingTop: STATUS_BAR_HEIGHT,
-      backgroundColor: '#2690fb',
-      borderBottomWidth: 0,
-      elevation: 0,
+      backgroundColor: '#2690fb'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -32,234 +92,41 @@ export default class GoodsMore extends React.Component {
     headerRight: <View />
   };
 
-  state = {
-    colorArray: ['近一月', '近三月', '近一年', '今年以来'],
-    touchColor: '近一月',
-    tabs: [
-      { title: '常规预警' },
-      { title: '非常规预警' },
-      { title: '舆情预警' },
-    ]
-  }
-
-  componentDidMount() {
-
-  }
-
-  handleChange = (item) => {
-    this.setState({
-      touchColor: item
-    })
-  }
-
   render() {
+
+    const tabs = [
+      { title: 'First Tab' },
+      { title: 'Second Tab' },
+      { title: 'Third Tab' },
+    ];
+
+    const tabs2 = [
+      { title: '蔬菜' },
+      { title: '水果' },
+      { title: '蛋类' },
+      { title: '能源' },
+      { title: '生猪' },
+      { title: '天然气' },
+      { title: '矿产' },
+    ];
+
+    const style = {
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 150,
+      backgroundColor: '#fff',
+    };
+
     return (
-      <View style={{ flex: 1, backgroundColor: '#f9f9f9' }}>
-        <View style={{ height: 150, width:'100%',backgroundColor: '#2690fb', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          {[1, 2, 3].map(item => {
-            return (
-              <View style={{ width: '33%', height: '100%', alignItems: 'center' }}>
-                <Text style={{ fontSize: 18, color: '#fff', marginTop: 30, fontWeight: '600' }}>
-                  34
-                </Text>
-                <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                  <Icon name="pay-circle" size="md" color="#fff"/>
-                  <Text style={{ fontSize: 16, color: '#fff', marginLeft: 2 }}>
-                    当前价格
-                  </Text>
-                </View>
-              </View>
-            )
-          })}
-        </View>
-        <Tabs tabs={this.state.tabs} swipeable={false} animated={false} tabBarInactiveTextColor="#ccc">
-          <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-            <View>
-              <View style={{ backgroundColor: '#fff', paddingTop: 20, paddingBottom: 10 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginHorizontal: 10 }}>
-                  {this.state.colorArray.map(item => {
-                    return (
-                      <TouchableNativeFeedback onPress={() => { this.handleChange(item) }} key={item}>
-                        <Text style={item === this.state.touchColor ? style.touchColor : style.defaultColor} >
-                          {item}
-                        </Text>
-                      </TouchableNativeFeedback>
-                    )
-                  })}
-                </View>
-                <View style={{ paddingHorizontal: 10 }}>
-                  <Echarts option={{
-                    tooltip: {
-                      trigger: 'axis'
-                    },
-                    grid: {
-                      left: '3%',
-                      right: '4%',
-                      bottom: '3%',
-                      top: '10%',
-                      containLabel: true
-                    },
-                    xAxis: {
-                      type: 'category',
-                      boundaryGap: false,
-                      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-                      axisLabel: {
-                        formatter: function (val) {
-                          if (val === '周一' || val === '周日') {
-                            return val
-                          }
-                          else {
-                            return ''
-                          }
-                        }
-                      }
-                    },
-                    yAxis: {
-                      type: 'value'
-                    },
-                    series: [
-                      {
-                        name: '邮件营销',
-                        type: 'line',
-                        stack: '总量',
-                        data: [120, 132, 101, 134, 90, 230, 210]
-                      },
-                      {
-                        name: '联盟广告',
-                        type: 'line',
-                        stack: '总量',
-                        data: [220, 182, 191, 234, 290, 330, 310]
-                      },
-                    ]
-                  }} height={300}
-                  />
-                </View>
-              </View>
-
-              <View style={{ marginTop: 15, backgroundColor: '#fff', paddingBottom: 10 }}>
-                <View>
-                  <Text style={{ fontSize: 18, marginLeft: 20, marginTop: 10 }}>
-                    资产规模
-                </Text>
-                </View>
-                <View style={{ paddingHorizontal: 20 }}>
-                  <Echarts option={{
-                    color: ['#3398DB'],
-                    tooltip: {
-                      trigger: 'axis',
-                      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                      }
-                    },
-                    grid: {
-                      left: '3%',
-                      right: '4%',
-                      bottom: '3%',
-                      top: '10%',
-                      containLabel: true
-                    },
-                    xAxis: [
-                      {
-                        type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu'],
-                        axisTick: {
-                          alignWithLabel: true
-                        }
-                      }
-                    ],
-                    yAxis: [
-                      {
-                        type: 'value'
-                      }
-                    ],
-                    series: [
-                      {
-                        name: '直接访问',
-                        type: 'bar',
-                        barWidth: '60%',
-                        data: [10, 52, 20, 34],
-                        itemStyle: {
-                          normal: {
-                            color: '#ccc'
-                          }
-                        }
-                      }
-                    ]
-                  }} height={300}
-                  />
-                </View>
-              </View>
-
-              <View style={{ marginTop: 15, backgroundColor: '#fff', paddingBottom: 10 }}>
-                <View>
-                  <Text style={{ fontSize: 18, marginLeft: 20, marginTop: 10 }}>
-                    内容预警
-                </Text>
-                </View>
-                <View style={{ paddingHorizontal: 5, marginBottom: 20 }}>
-                  <DataTabel></DataTabel>
-                </View>
-              </View>
-
+        <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
+                <Tabs tabs={tabs2} initialPage={0} tabBarPosition="top" tabBarActiveTextColor="#409EFF" tabBarUnderlineStyle={{backgroundColor:'transparent'}} tabBarTextStyle={{fontSize:16}}>
+                    {renderContent}
+                </Tabs>
             </View>
-          </ScrollView>
-          <View>
-            <Text>Content of Second Tab</Text>
-          </View>
-          <View>
-            <Text>Content of Third Tab</Text>
-          </View>
-        </Tabs>
-        <View style={style.fixedStyle}>
-          <View>
-            <Text style={{ color: 'black' }}>
-              涨幅度
-            </Text>
-          </View>
-          <View style={{ flexDirection: 'row', marginLeft: 30, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: 'green' }}>
-              1.26%
-            </Text>
-            <Icon name="rise" size="md" color="green" />
-          </View>
-          <View style={{ flexDirection: 'row', marginLeft: 30, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: 'red' }}>
-              1.26%
-            </Text>
-            <Icon name="fall" size="md" color="red" />
-          </View>
         </View>
-      </View>
     );
   }
 }
-
-const style = StyleSheet.create({
-  touchColor: {
-    color: '#000',
-    fontSize: 16,
-    backgroundColor: "#ccc",
-    borderRadius: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 3
-  },
-  defaultColor: {
-    color: '#ccc',
-    fontSize: 16,
-    borderRadius: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 3
-  },
-  fixedStyle: {
-    height: 30,
-    width: width,
-    position: 'absolute',
-    top: scrollHeight,
-    left: 0,
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    elevation: 5,
-  }
-})
+export const title = 'Tabs';
+export const description = 'Tabs example';

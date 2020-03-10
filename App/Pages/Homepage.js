@@ -11,7 +11,20 @@ const STATUS_BAR_HEIGHT3 = StatusBar.currentHeight * 3
 class Homepage extends Component {
     constructor(props) {
         super(props)
+        this.state= {
+            queryRpt: 123
+        }
     }
+    componentDidMount() {
+        fetch('https://randomuser.me/api/?results=25',{method:'GET'}).then(res=>{
+            // this.setState({
+            //     queryRpt: res.msg
+            // })
+
+        })
+            .catch(e=>{alert(e)})
+    }
+
     static navigationOptions = {
         header: null
     };
